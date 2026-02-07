@@ -2,19 +2,33 @@ from typer import Typer
 from enum import StrEnum
 import typer
 from yt_dlp import YoutubeDL
-from typing import Annotated, Optional
+from typing import Annotated, Optional, Literal, Union
+import random
 from rich.prompt import Prompt
 
 app = Typer()
 
+
 class AudioFormat(StrEnum):
-    mp3 = "MP3"
-    wav = "WAV"
+    MP3 = "mp3"
+    WAV = "wav"
     m4a = "M4A"
 
+
 class VideoFormat(StrEnum):
-    mp4 = "MP4"
-    mov = "MOV"
+    MP4 = "mp4"
+    MOV = "mov"
+
+
+class EveryFormat(StrEnum):
+    # Audio Format
+    MP3 = "mp3"
+    WAV = "wav"
+    m4a = "M4A"
+    # Video Format
+    MP4 = "mp4"
+    MOV = "mov"
+
 
 @app.command()
 def main():
@@ -23,51 +37,55 @@ def main():
 
 @app.command()
 def download(
-    mp4: Annotated[bool, typer.Option("--mp4")] = False,
-    mp3: Annotated[bool, typer.Option("--mp3")] = False,
-    wav : Annotated[bool, typer.Option("--wav")] = False,
-    mov: Annotated[bool, typer.Option("--mov")] = False,
+    format: EveryFormat,
+    worst: Annotated[bool, typer.Option()] = False,
+    random_number: Annotated[bool, typer.Option()] = True,
 ):
-    url: str = Prompt.ask("[b]What is the url ? [/b]")
+    url: str = Prompt.ask("[b]What is the url ? 🔗 [/b]")
     if not url.startswith("https://"):
         raise typer.Exit()
-    
-    AUDIO_FORMAT : str | None = None
 
-    VIDEO_FORMAT : str | None = None
-
-    if mp3 or wav:
-        
-        
-
-    if mp4:
-        ydl_opts: any = {
-            # "format": "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b",
-            "format": "bestvideo*+bestaudio/best",
-            "merge_output_format": "mp4",
-            "outtmpl": "./%(title)s.%(ext)s",
-        }
-
-        with YoutubeDL(ydl_opts) as ydl:
-            file = ydl.download(url)
-
-        return
-
-    if mp3:
-        ydl_opts = {
+    if format.value in AudioFormat:
+        format_opts = {
             # "format": "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b",
             "format": "bestaudio/best",
             "postprocessors": [
                 {  # Extract audio using ffmpeg
                     "key": "FFmpegExtractAudio",
-                    "preferredcodec": "mp3",
+                    "preferredcodec": format.value,
                 }
             ],
-            "converouttmpl": "./%(title)s.%(ext)s",
         }
 
-        with YoutubeDL(ydl_opts) as ydl:
-            file = ydl.download(url)
+    if format.value in VideoFormat:
+        if worst:
+            format_opts = {
+                # "format": "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b",
+                "format": "worstvideo*+worstaudio/worst",
+                "merge_output_format": format.value,
+            }
+        else:
+            format_opts = {
+                # "format": "bv*[ext=mp4]+ba[ext=m4a]/b[ext=mp4]/b",
+                "format": "bestvideo*+bestaudio/best",
+                "merge_output_format": format.value,
+            }
+
+    if random_number:
+        title_opts = {
+            "outtmpl": f"./%(title)s |[{random.randint(1, 1000)}].%(ext)s",
+            "download_archive": None,
+            "force_overwrites": True,
+        }
+    else:
+        title_opts = {
+            "outtmpl": f"./%(title)s.%(ext)s",
+        }
+
+    ydl_opts = format_opts | title_opts
+
+    with YoutubeDL(ydl_opts) as ydl:
+        ydl.download(url)
 
 
 if __name__ == "__main__":

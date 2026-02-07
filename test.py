@@ -1,3 +1,3 @@
 from yt_dlp import _Params
 
-ytoption: _Params = {"param"}
+ytoption: _Params = {"down"}}
