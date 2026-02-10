@@ -8,7 +8,7 @@ from rich.prompt import Prompt, Confirm
 from rich.console import Console
 from core.logger import SytdlpLogger
 import logging
-from core.hook import spinner_downloading, spinner_postprocess
+from core.hook import progress_downloading, spinner_postprocess
 
 app = Typer()
 console = Console()
@@ -56,14 +56,15 @@ def download(
         bool, typer.Option(help="Remove the random number in the end folder name")
     ] = True,
     verbose: Annotated[bool, typer.Option(help="See every logs of yt-dlp")] = False,
+    url: Annotated[str, typer.Option(help="Give the URL")] = "",
 ):
-
-    url: str = Prompt.ask("[b]What is the url ? 🔗 [/b]")
-    if not url.startswith("https://"):
-        console.print(
-            "[bold red]Please retry the command with a direct link.[/bold red]"
-        )
-        raise typer.Exit()
+    if not url:
+        url = Prompt.ask("[b]What is the url ? 🔗 [/b]")
+        if not url.startswith("https://"):
+            console.print(
+                "[bold red]Please retry the command with a direct link.[/bold red]"
+            )
+            raise typer.Exit()
 
     if format.value in AudioFormat:
         format_opts = {
@@ -128,7 +129,7 @@ def download(
             "quiet": True,
             "no_warnings": True,
             "noprogress": True,
-            "progress_hooks": [spinner_downloading],
+            "progress_hooks": [progress_downloading],
             "postprocessor_hooks": [spinner_postprocess],
         }
 
