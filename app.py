@@ -9,10 +9,13 @@ from rich.console import Console
 from core.logger import SytdlpLogger
 import logging
 from core.hook import progress_downloading, spinner_postprocess
+import importlib
+import yt_dlp
 
 app = Typer()
 console = Console()
 
+__version__ = importlib.metadata.version('Sdlp')
 
 class AudioFormat(StrEnum):
     MP3 = "mp3"
@@ -143,6 +146,12 @@ def download(
         console.print(
             "There error report to https://github.com/writedev/simple-yt-dlp-cli/issues"
         )
+
+
+@app.command()
+def version():
+    console.print(f"Sdlp version : {__version__}")
+    console.print(f"yt-dlp version : {yt_dlp.version._pkg_version}")
 
 
 if __name__ == "__main__":
