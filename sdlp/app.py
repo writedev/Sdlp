@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 from typer import Typer
 from enum import StrEnum
 import typer
@@ -12,10 +15,12 @@ from core.hook import progress_downloading, spinner_postprocess
 import importlib
 import yt_dlp
 
+
 app = Typer()
 console = Console()
 
-__version__ = importlib.metadata.version('Sdlp')
+__version__ = importlib.metadata.version("Sdlp")
+
 
 class AudioFormat(StrEnum):
     MP3 = "mp3"
@@ -38,11 +43,6 @@ class EveryFormat(StrEnum):
     MP4 = "mp4"
     MOV = "mov"
     MKV = "mkv"
-
-
-@app.command()
-def main():
-    pass
 
 
 @app.command()
@@ -154,5 +154,9 @@ def version():
     console.print(f"yt-dlp version : {yt_dlp.version._pkg_version}")
 
 
-if __name__ == "__main__":
-    app()
+def main():
+    return app()
+
+
+# if __name__ == "__main__":
+#     app()

@@ -10,3 +10,6 @@ dependencies = [
     "typer>=0.21.1",
     "yt-dlp>=2026.2.4",
 ]
+
+[project.scripts]
+sdlp = "sdlp.app:main"
