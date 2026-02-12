@@ -1,6 +1,3 @@
-#!/usr/bin/env node
-
-
 from typer import Typer
 from enum import StrEnum
 import typer
@@ -9,17 +6,16 @@ from typing import Annotated
 import random
 from rich.prompt import Prompt, Confirm
 from rich.console import Console
-from core.logger import SytdlpLogger
+from sdlp.core.logger import SytdlpLogger
 import logging
-from core.hook import progress_downloading, spinner_postprocess
-import importlib
+from sdlp.core.hook import progress_downloading, spinner_postprocess
+import importlib.metadata as metadata
 import yt_dlp
-
 
 app = Typer()
 console = Console()
 
-__version__ = importlib.metadata.version("Sdlp")
+__version__ = metadata.version("Sdlp")
 
 
 class AudioFormat(StrEnum):
@@ -151,12 +147,8 @@ def download(
 @app.command()
 def version():
     console.print(f"Sdlp version : {__version__}")
-    console.print(f"yt-dlp version : {yt_dlp.version._pkg_version}")
+    console.print(f"yt-dlp version : {yt_dlp.version.__version__}")
 
 
-def main():
-    return app()
-
-
-# if __name__ == "__main__":
-#     app()
+if __name__ == "__main__":
+    app()

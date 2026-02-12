@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 from rich.console import Console
 from rich.live import Live
 from rich.spinner import Spinner
