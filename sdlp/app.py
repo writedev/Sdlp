@@ -152,10 +152,5 @@ def version():
     console.print(f"**yt-dlp** version : {yt_dlp.version.__version__}")
 
 
-@app.command()
-def test():
-    console.print("test")
-
-
 if __name__ == "__main__":
     app()
