@@ -36,4 +36,4 @@ sdlp = "sdlp:app"
 version = {attr = "sdlp.__version__"}
 
 [project.urls]
-repository = "https://github.com/writedev/simple-yt-dlp-cli"
+repository = "https://github.com/writedev/Sdlp"
