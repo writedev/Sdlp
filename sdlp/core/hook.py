@@ -49,7 +49,7 @@ def progress_downloading(d: dict):
         console.print("[green]The Downloading is finished ! [/green]")
 
 
-def spinner_postprocess(d):
+def spinner_postprocess(d: dict):
     live.start()
     spinner.update(text="[b]Postprocessing...")
     if d["status"] == "finished":

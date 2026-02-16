@@ -1,15 +1,39 @@
 [project]
 name = "Sdlp"
-version = "0.1.0"
-description = "A wrapper of yt-dlp to simplify its usage."
+dynamic = ["version"]
+
+description = "A simple video downloader based on yt-dlp"
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+
+authors = [{name = "writedev"}]
+classifiers = [
+    "Topic :: Multimedia :: Video :: Capture", 
+    "Topic :: Multimedia :: Video",
+    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",  
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    ]
+
 requires-python = ">=3.13"
 dependencies = [
     "curl-cffi>=0.14.0",
     "ffmpeg>=1.4",
+    "rich>=14.3.2",
     "typer>=0.21.1",
     "yt-dlp>=2026.2.4",
 ]
 
+
 [project.scripts]
-sdlp = "sdlp:main"
+sdlp = "sdlp:app"
+
+[tool.setuptools.dynamic]
+version = {attr = "sdlp.__version__"}
+
+[project.urls]
+repository = "https://github.com/writedev/simple-yt-dlp-cli"

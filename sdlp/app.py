@@ -17,6 +17,8 @@ console = Console()
 
 __version__ = metadata.version("Sdlp")
 
+TEST = True
+
 
 class AudioFormat(StrEnum):
     MP3 = "mp3"
@@ -147,7 +149,12 @@ def download(
 @app.command()
 def version():
     console.print(f"Sdlp version : {__version__}")
-    console.print(f"yt-dlp version : {yt_dlp.version.__version__}")
+    console.print(f"**yt-dlp** version : {yt_dlp.version.__version__}")
+
+
+@app.command()
+def test():
+    console.print("test")
 
 
 if __name__ == "__main__":

@@ -1,3 +1,4 @@
 from .app import app
+from . import core
 
-app = app()
+__version__ = "0.1"
