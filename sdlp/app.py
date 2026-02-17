@@ -58,6 +58,9 @@ def download(
     ] = True,
     verbose: Annotated[bool, typer.Option(help="See every logs of yt-dlp")] = False,
     url: Annotated[str, typer.Option(help="Give the URL")] = "",
+    simulate: Annotated[
+        bool, typer.Option(help="For test but dont download video")
+    ] = False,
 ):
     if not url:
         url = Prompt.ask("[b]What is the url ? 🔗 [/b]")
@@ -123,6 +126,8 @@ def download(
 
     hook_opts = {}
 
+    utils_opts = {}
+
     if verbose:
         hook_opts = hook_opts | {"logger": SytdlpLogger(), "verbose": True}
     else:
@@ -134,11 +139,13 @@ def download(
             "postprocessor_hooks": [spinner_postprocess],
         }
 
-    ydl_opts = format_opts | title_opts | hook_opts  # type: ignore
+    if simulate:
+        utils_opts = utils_opts | {"simulate": True}
+
+    ydl_opts = format_opts | title_opts | hook_opts | utils_opts  # type: ignore
     try:
         with YoutubeDL(ydl_opts) as ydl:  # type: ignore
             ydl.download(url)
-
     except Exception as e:
         logging.error(e)
         console.print(

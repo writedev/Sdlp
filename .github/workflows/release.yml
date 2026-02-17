@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: write   # obligatoire pour Trusted Publishing
+      id-token: write
       contents: read
 
-    environment: pypi  # doit matcher PyPI si configuré
+    environment: pypi
 
     steps:
       - uses: actions/checkout@v4
