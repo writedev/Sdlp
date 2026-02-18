@@ -3,7 +3,7 @@ import typer
 
 __version__ = "2.1"
 
-app = typer.Typer()
+app = typer.Typer(suggest_commands=True)
 
 app.add_typer(core_app)
 
