@@ -3,7 +3,7 @@ from typing import Annotated
 
 import typer
 from rich.console import Console
-from rich.prompt import Confirm, Prompt
+from rich.prompt import Confirm
 from yt_dlp import YoutubeDL
 
 from ..utils.format import VideoFormat
@@ -15,7 +15,8 @@ console = Console()
 
 @app.command()
 def video(
-    format: VideoFormat,
+    url: str,
+    format: VideoFormat = VideoFormat.MP4,
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),
@@ -28,11 +29,7 @@ def video(
         ),
     ] = True,
     verbose: Annotated[bool, typer.Option(help="See every logs of yt-dlp")] = False,
-    url: Annotated[str, typer.Option(help="Give the URL")] = "",
 ):
-    if not url:
-        url = Prompt.ask("[b]Give the url 🔗 [/b]")
-
     if not url.startswith("https://"):
         console.print(
             "[bold red]Please retry the command with a direct url.[/bold red]"

@@ -15,7 +15,8 @@ console = Console()
 
 @app.command()
 def audio(
-    format: AudioFormat,
+    url: str,
+    format: AudioFormat = AudioFormat.MP3,
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),
@@ -28,7 +29,6 @@ def audio(
         ),
     ] = True,
     verbose: Annotated[bool, typer.Option(help="See every logs of yt-dlp")] = False,
-    url: Annotated[str, typer.Option(help="Give the URL")] = "",
 ):
     if not url:
         url = Prompt.ask("[b]Give the url 🔗 [/b]")

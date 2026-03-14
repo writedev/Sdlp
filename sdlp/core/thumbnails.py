@@ -3,7 +3,6 @@ from typing import Annotated
 
 import typer
 from rich.console import Console
-from rich.prompt import Prompt
 from yt_dlp import YoutubeDL
 
 from ..utils.format import ImageFormat
@@ -15,6 +14,7 @@ console = Console()
 
 @app.command()
 def thumbnails(
+    url: str,
     format: ImageFormat = ImageFormat.PNG,
     file_name: Annotated[
         str,
@@ -27,11 +27,7 @@ def thumbnails(
         ),
     ] = True,
     verbose: Annotated[bool, typer.Option(help="See every logs of yt-dlp")] = False,
-    url: Annotated[str, typer.Option(help="Give the URL")] = "",
 ):
-    if not url:
-        url = Prompt.ask("[b]Give the url 🔗 [/b]")
-
     if not url.startswith("https://"):
         console.print(
             "[bold red]Please retry the command with a direct url.[/bold red]"
