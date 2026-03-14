@@ -7,5 +7,7 @@ app = typer.Typer(suggest_commands=True)
 
 app.add_typer(core_app)
 
+__main__ = app()
+
 if __name__ == "__main__":
     app()
