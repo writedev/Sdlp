@@ -37,3 +37,41 @@ version = {attr = "sdlp.__version__"}
 
 [project.urls]
 repository = "https://github.com/writedev/Sdlp"
+
+[tool.ty.analysis]
+respect-type-ignore-comments = false
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
+
+exclude = [
+    ".git",
+    ".venv",
+    "build",
+    "dist",
+    "__pycache__"
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort (imports)
+    "B",   # flake8-bugbear
+    "UP",  # pyupgrade
+    "C4",  # flake8-comprehensions
+    "SIM", # simplifications
+]
+
+ignore = [
+    "E501",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["my_project"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "auto"
