@@ -16,9 +16,7 @@ def video(
     format: VideoFormat,
     file_name: Annotated[
         str,
-        typer.Option(
-            help="Choose file folder name (default is the title of the video)"
-        ),
+        typer.Option(help="Choose file name (default is the title of the video)"),
     ] = "%(title)s",
     worst: Annotated[bool, typer.Option(help="Get the worst quality video")] = False,
     random_number: Annotated[
