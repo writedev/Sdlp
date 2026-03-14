@@ -16,7 +16,7 @@ app.add_typer(core_app)
 @app.command()
 def version():
     console.print(f"Sdlp version: [b]{__version__}[/b]")
-    console.print(f"Sdlp version: [b]{ydl_version.__version__}[/b]")
+    console.print(f"yt-dlp version: [b]{ydl_version.__version__}[/b]")
 
 
 __main__ = app()
