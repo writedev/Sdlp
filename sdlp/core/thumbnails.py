@@ -12,7 +12,7 @@ app = typer.Typer()
 console = Console()
 
 
-@app.command()
+@app.command(help="Download the thumbnails of the video.")
 def thumbnails(
     url: str,
     format: ImageFormat = ImageFormat.PNG,

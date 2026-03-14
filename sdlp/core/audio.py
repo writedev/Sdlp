@@ -13,7 +13,7 @@ app = typer.Typer()
 console = Console()
 
 
-@app.command()
+@app.command(help="Download the audio of the video.")
 def audio(
     url: str,
     format: AudioFormat = AudioFormat.MP3,

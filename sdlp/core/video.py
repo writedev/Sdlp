@@ -13,7 +13,7 @@ app = typer.Typer()
 console = Console()
 
 
-@app.command()
+@app.command(help="Download a video in the best quality.")
 def video(
     url: str,
     format: VideoFormat = VideoFormat.MP4,
