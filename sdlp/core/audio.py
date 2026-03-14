@@ -16,7 +16,9 @@ console = Console()
 @app.command(help="Download the audio of the video.")
 def audio(
     url: str,
-    format: AudioFormat = AudioFormat.MP3,
+    format: Annotated[
+        AudioFormat, typer.Option(help="Choose the format of the audio.")
+    ],
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),

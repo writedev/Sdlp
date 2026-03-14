@@ -15,7 +15,9 @@ console = Console()
 @app.command(help="Download the thumbnails of the video.")
 def thumbnails(
     url: str,
-    format: ImageFormat = ImageFormat.PNG,
+    format: Annotated[
+        ImageFormat, typer.Option(help="Choose the format of the thumbnails.")
+    ] = ImageFormat.PNG,
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),

@@ -16,7 +16,9 @@ console = Console()
 @app.command(help="Download a video in the best quality.")
 def video(
     url: str,
-    format: VideoFormat = VideoFormat.MP4,
+    format: Annotated[
+        VideoFormat, typer.Option(help="Choose the format of the video.")
+    ] = VideoFormat.MP4,
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),
