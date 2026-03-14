@@ -4,7 +4,7 @@ from rich.console import Console
 
 from .core import app as core_app
 
-__version__ = "2.1"
+__version__ = "2.0"
 
 app = typer.Typer(suggest_commands=True)
 console = Console()
