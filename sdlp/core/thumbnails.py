@@ -1,5 +1,5 @@
 import typer
-from ..utils.format import AudioFormat
+from ..utils.format import ImageFormat
 from ..utils.progress_hook import progress_downloading, spinner_postprocess
 from typing import Annotated
 from rich.prompt import Prompt
@@ -13,6 +13,7 @@ console = Console()
 
 @app.command()
 def thumbnails(
+    format: ImageFormat = ImageFormat.PNG,
     file_name: Annotated[
         str,
         typer.Option(help="Choose file name (default is the title of the video)"),
@@ -41,7 +42,7 @@ def thumbnails(
         "postprocessors": [
             {
                 "key": "FFmpegThumbnailsConvertor",
-                "format": "png",  # Format cible
+                "format": format,  # Format cible
                 "when": "before_dl",  # Optionnel, force le traitement
             }
         ],

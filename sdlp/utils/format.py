@@ -11,3 +11,8 @@ class VideoFormat(StrEnum):
     MP4 = "mp4"
     MOV = "mov"
     MKV = "mkv"
+
+
+class ImageFormat(StrEnum):
+    PNG = "png"
+    JPG = "jpg"
