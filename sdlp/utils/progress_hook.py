@@ -1,17 +1,14 @@
 from rich.console import Console
 from rich.live import Live
-from rich.spinner import Spinner
-from rich.progress import Progress
 from rich.progress import (
-    TransferSpeedColumn,
     BarColumn,
-    TextColumn,
-    SpinnerColumn,
-    TimeElapsedColumn,
-    ProgressColumn,
     DownloadColumn,
-    TimeRemainingColumn,
+    Progress,
+    SpinnerColumn,
+    TextColumn,
+    TimeElapsedColumn,
 )
+from rich.spinner import Spinner
 
 console = Console()
 
