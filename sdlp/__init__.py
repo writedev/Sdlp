@@ -1,7 +1,8 @@
-from .core import app as core_app
 import typer
-from rich.console import Console
 import yt_dlp.version as ydl_version
+from rich.console import Console
+
+from .core import app as core_app
 
 __version__ = "2.1"
 

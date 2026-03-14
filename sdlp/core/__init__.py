@@ -1,7 +1,8 @@
-from .video import app as core_video_app
+import typer
+
 from .audio import app as core_audio_app
 from .thumbnails import app as core_thumbnails_app
-import typer
+from .video import app as core_video_app
 
 app = typer.Typer()
 

@@ -1,11 +1,13 @@
+import random
+from typing import Annotated
+
 import typer
+from rich.console import Console
+from rich.prompt import Confirm, Prompt
+from yt_dlp import YoutubeDL
+
 from ..utils.format import VideoFormat
 from ..utils.progress_hook import progress_downloading, spinner_postprocess
-from typing import Annotated
-from rich.prompt import Prompt, Confirm
-from rich.console import Console
-from yt_dlp import YoutubeDL
-import random
 
 app = typer.Typer()
 console = Console()
