@@ -1,25 +1,55 @@
-import typer
-import yt_dlp.version as ydl_version
-from rich.console import Console
+from pathlib import Path
+from typing import Literal
 
-from .core import app as core_app
+from yt_dlp import YoutubeDL
 
-__version__ = "2.0"
-
-app = typer.Typer(suggest_commands=True)
-console = Console()
+from .utils.format import VideoFormat
+from .utils.types import Output
 
 
-app.add_typer(core_app)
+class Sdlp:
+    def __init__(self) -> None:
+        self.file_name: str
+        self.verbose: bool
 
+    # def download_video(self, url: str, format: VideoFormat = VideoFormat.MP4):
+    #     with YoutubeDL() as ydl:  # type: ignore
+    #         ydl.download(url)
 
-@app.command()
-def version():
-    console.print(f"Sdlp version: [b]{__version__}[/b]")
-    console.print(f"yt-dlp version: [b]{ydl_version.__version__}[/b]")
+    #     return True
+    def download_video(
+        self,
+        url: str,
+        format: Literal["mp4", "mov", "mkv"],
+        no_logs: bool = True,
+        file_title: str = "%(title)s",
+    ):
 
+        VideoFormat(format)
+        # Error with mov because the mov doesn't accept the vp9 codec (google codec)
 
-__main__ = app()
+        if format in ["mov", "mkv"]:
+            format_opts = {
+                "format": "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best",
+                "merge_output_format": format,
+                "postprocessors": [
+                    {
+                        "key": "FFmpegVideoRemuxer",
+                        "preferedformat": format,
+                    }
+                ],
+                "outtmpl": "%(id)s.%(ext)s",
+            }
+        else:
+            format_opts = {
+                "format": "bestvideo+bestaudio/best",
+                "merge_output_format": format,
+            }
 
-if __name__ == "__main__":
-    app()
+        utils_opts = {"quiet": no_logs, "outtmpl": f"{file_title}.%(ext)s"}
+
+        ydl_opts = format_opts | utils_opts
+
+        with YoutubeDL(ydl_opts) as ydl:  # type: ignore
+            info = dict(ydl.extract_info(url))
+        return Output(info)
