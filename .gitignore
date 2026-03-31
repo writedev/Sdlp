@@ -9,7 +9,7 @@ wheels/
 # Virtual environments
 .venv
 
-# Video / Wav
+# Video / Audio / Image
 *.mov
 *.mp4
 *.mp3
@@ -17,3 +17,6 @@ wheels/
 *.m4a
 *.webm
 *.mkv
+*.png
+*.jpg
+*.jpeg

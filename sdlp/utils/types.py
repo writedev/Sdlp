@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from yt_dlp import YoutubeDL
 
 
@@ -27,7 +28,7 @@ class Output:
         self.pure_info: dict = pure_info
 
     @property
-    def info(self):
+    def info(self) -> InfoOutput:
         return InfoOutput(self.pure_info)
 
     def convert_to_mp3(self):

@@ -1,11 +1,7 @@
-from sdlp import Sdlp
+import sdlp
 
-video = Sdlp().download_video(
-    "https://youtu.be/IVdyt2pNxn8?si=z8b7aznXMw3Tmpot",
-    format="mp4",
-    file_title="zizidelastreet",
+video = sdlp.download_thumbnails(
+    "https://youtu.be/IVdyt2pNxn8?si=z8b7aznXMw3Tmpot", format="jpg"
 )
-
-print(video.info.path)
 
 # https://youtu.be/IVdyt2pNxn8?si=z8b7aznXMw3Tmpot
