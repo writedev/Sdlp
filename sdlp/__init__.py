@@ -49,7 +49,7 @@ def download_video(
         print(e)
 
 
-def download_mp3(
+def download_audio(
     url: str,
     format: Literal["mp3", "wav", "m4a"] = "mp3",
     no_logs: bool = True,
@@ -72,7 +72,10 @@ def download_mp3(
 
     utils_opts = {"quiet": no_logs, "outtmpl": f"{file_title}.%(ext)s"}
 
-    ydl_opts = format_opts | utils_opts
+    if not extras:
+        extras = {}
+
+    ydl_opts = format_opts | utils_opts | extras
 
     try:
         with YoutubeDL(ydl_opts) as ydl:
