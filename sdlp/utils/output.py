@@ -25,7 +25,8 @@ class InfoOutput:
 
 class Output:
     def __init__(self, pure_info: dict) -> None:
-        self.pure_info: dict = pure_info
+        # self.pure_info: dict = pure_info
+        pass
 
     @property
     def info(self) -> InfoOutput:

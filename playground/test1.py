@@ -12,7 +12,7 @@ video = sdlp.download_audio(
     },
 )
 
-open("data.json", "w+").write(str(video.pure_info))
+open("data.json", "w+").write(str(video.info.pure_info))
 
 # print(video.info.pure_info)
 
