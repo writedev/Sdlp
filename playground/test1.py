@@ -14,6 +14,9 @@ video = sdlp.download_audio(
 
 open("data.json", "w+").write(str(video.info.pure_info))
 
+
+print(video.info.author)
+
 # print(video.info.pure_info)
 
 # https://youtu.be/IVdyt2pNxn8?si=z8b7aznXMw3Tmpot

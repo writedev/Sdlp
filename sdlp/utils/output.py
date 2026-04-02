@@ -7,10 +7,10 @@ class InfoOutput:
     def __init__(self, pure_info: dict) -> None:
         self.info: dict = pure_info
 
-        self.title: str = pure_info["title"]
-        self.id: str = str(pure_info["id"])
+        self.title: str = pure_info.get("title")
+        self.id: str = str(pure_info.get("id"))
 
-        self.original_url: str = pure_info["webpage_url"]
+        self.original_url: str = pure_info.get("webpage_url")
 
         self.pure_info: dict = pure_info
 
@@ -26,11 +26,12 @@ class InfoOutput:
 class Output:
     def __init__(self, pure_info: dict) -> None:
         # self.pure_info: dict = pure_info
+        self.__pure_info__ = pure_info
         pass
 
     @property
     def info(self) -> InfoOutput:
-        return InfoOutput(self.pure_info)
+        return InfoOutput(self.__pure_info__)
 
     def convert_to_mp3(self):
         print("mp3")
