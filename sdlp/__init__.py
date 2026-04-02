@@ -3,7 +3,7 @@ from typing import Literal
 from yt_dlp import YoutubeDL
 
 from .utils.format import AudioFormat, ImageFormat, VideoFormat
-from .utils.output import Output
+from .utils.output import Video
 
 
 def download_video(
@@ -43,7 +43,7 @@ def download_video(
         with YoutubeDL(ydl_opts) as ydl:
             extract_info = dict(ydl.extract_info(url, download=True))
 
-        return Output(extract_info)
+        return Video(extract_info)
 
     except Exception as e:
         print(e)
@@ -81,7 +81,7 @@ def download_audio(
         with YoutubeDL(ydl_opts) as ydl:
             extract_info = dict(ydl.extract_info(url, download=True))
 
-        return Output(extract_info)
+        return Video(extract_info)
 
     except Exception as e:
         print(e)
@@ -120,7 +120,7 @@ def download_thumbnails(
         with YoutubeDL(ydl_opts) as ydl:
             extract_info = dict(ydl.extract_info(url, download=True))
 
-        return Output(extract_info)
+        return Video(extract_info)
 
     except Exception as e:
         print(e)

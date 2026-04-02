@@ -3,7 +3,7 @@ from pathlib import Path
 from yt_dlp import YoutubeDL
 
 
-class InfoOutput:
+class VideoInfo:
     def __init__(self, pure_info: dict) -> None:
         self.pure_info: dict = pure_info
 
@@ -19,24 +19,20 @@ class InfoOutput:
 
         self.duration: int | None = int(pure_info.get("duration"))
 
+
+class Video:
+    def __init__(self, pure_info: dict) -> None:
+        # self.pure_info: dict = pure_info
+        self.__pure_info__ = pure_info
         self.path = self.get_path()
+        pass
+
+    @property
+    def info(self) -> VideoInfo:
+        return VideoInfo(self.__pure_info__)
 
     def get_path(self) -> Path:
         with YoutubeDL() as ydl:
             path = Path(ydl.prepare_filename(self.pure_info))
 
         return path
-
-
-class Output:
-    def __init__(self, pure_info: dict) -> None:
-        # self.pure_info: dict = pure_info
-        self.__pure_info__ = pure_info
-        pass
-
-    @property
-    def info(self) -> InfoOutput:
-        return InfoOutput(self.__pure_info__)
-
-    def convert_to_mp3(self):
-        print("mp3")
