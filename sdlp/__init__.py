@@ -37,7 +37,10 @@ def download_video(
 
     utils_opts = {"quiet": no_logs, "outtmpl": f"{file_title}.%(ext)s"}
 
-    ydl_opts = format_opts | utils_opts
+    if not extras:
+        extras = {}
+
+    ydl_opts = format_opts | utils_opts | extras
 
     try:
         with YoutubeDL(ydl_opts) as ydl:

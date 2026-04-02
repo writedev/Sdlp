@@ -24,8 +24,8 @@ class Video:
     def __init__(self, pure_info: dict) -> None:
         # self.pure_info: dict = pure_info
         self.__pure_info__ = pure_info
+
         self.path = self.get_path()
-        pass
 
     @property
     def info(self) -> VideoInfo:
@@ -33,6 +33,6 @@ class Video:
 
     def get_path(self) -> Path:
         with YoutubeDL() as ydl:
-            path = Path(ydl.prepare_filename(self.pure_info))
+            path = Path(ydl.prepare_filename(self.__pure_info__))
 
         return path
