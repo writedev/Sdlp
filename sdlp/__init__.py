@@ -3,7 +3,7 @@ from typing import Literal
 from yt_dlp import YoutubeDL
 
 from .utils.format import AudioFormat, ImageFormat, VideoFormat
-from .utils.types import Output
+from .utils.output import Output
 
 
 def download_video(
