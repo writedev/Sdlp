@@ -2,7 +2,7 @@ import sdlp
 from sdlp.ui.progress_hooks import progress_downloading
 
 video = sdlp.download_audio(
-    "https://youtu.be/57C13H0BnnU?si=h_mr2Ajx7snXcHV5",
+    "https://www.dailymotion.com/video/xa428o4",
     format="wav",
     extras={
         "quiet": True,
@@ -12,10 +12,12 @@ video = sdlp.download_audio(
     },
 )
 
-open("data.json", "w+").write(str(video.info.pure_info))
 
+print(video)
 
 print(video.info.author)
+print(video.info.author_id)
+print(video.info.duration)
 
 # print(video.info.pure_info)
 
