@@ -1,3 +1,5 @@
+__version__ = 2.1
+
 from typing import Literal
 
 from yt_dlp import YoutubeDL
@@ -11,7 +13,7 @@ def download_video(
     format: Literal["mp4", "mov", "mkv"] = "mp4",
     no_logs: bool = True,
     file_title: str = "%(title)s",
-    extras: dict = None,
+    extras: dict | None = None,
 ):
 
     VideoFormat(format)
@@ -57,7 +59,7 @@ def download_audio(
     format: Literal["mp3", "wav", "m4a"] = "mp3",
     no_logs: bool = True,
     file_title: str = "%(title)s",
-    extras: dict = None,
+    extras: dict | None = None,
 ):
 
     AudioFormat(format)
@@ -98,7 +100,7 @@ def download_thumbnails(
     ] = "png",
     no_logs: bool = True,
     file_title: str = "%(title)s",
-    extras: dict = None,
+    extras: dict | None = None,
 ):
 
     ImageFormat(format)
