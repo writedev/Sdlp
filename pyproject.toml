@@ -7,17 +7,17 @@ readme = "README.md"
 license = "MIT"
 license-files = ["LICENSE"]
 
-authors = [{name = "writedev"}]
+authors = [{ name = "writedev" }]
 classifiers = [
-    "Topic :: Multimedia :: Video :: Capture", 
+    "Topic :: Multimedia :: Video :: Capture",
     "Topic :: Multimedia :: Video",
-    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",  
+    "Topic :: Multimedia :: Sound/Audio :: Capture/Recording",
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    ]
+]
 
 requires-python = ">=3.13"
 dependencies = [
@@ -30,10 +30,13 @@ dependencies = [
 
 
 [project.scripts]
-sdlp = "sdlp:app"
+sdlp = "sdlp.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["sdlp*"]
 
 [tool.setuptools.dynamic]
-version = {attr = "sdlp.__version__"}
+version = { attr = "sdlp.__version__" }
 
 [project.urls]
 repository = "https://github.com/writedev/Sdlp"
@@ -45,13 +48,7 @@ respect-type-ignore-comments = false
 line-length = 88
 target-version = "py311"
 
-exclude = [
-    ".git",
-    ".venv",
-    "build",
-    "dist",
-    "__pycache__"
-]
+exclude = [".git", ".venv", "build", "dist", "__pycache__"]
 
 [tool.ruff.lint]
 select = [
@@ -64,9 +61,7 @@ select = [
     "SIM", # simplifications
 ]
 
-ignore = [
-    "E501",
-]
+ignore = ["E501"]
 
 [tool.ruff.lint.isort]
 known-first-party = ["my_project"]
