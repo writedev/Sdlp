@@ -30,7 +30,7 @@ dependencies = [
 
 
 [project.scripts]
-sdlp = "sdlp.cli:app"
+sdlp = "sdlp.term:app"
 
 [tool.setuptools.packages.find]
 include = ["sdlp*"]

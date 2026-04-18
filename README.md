@@ -6,5 +6,5 @@ uv run python -m sdlp
 for test the cli (dev):
 
 ```sh
-uv tool upgrade . --reinstall
+uv tool upgrade sdlp --reinstall
 ```
