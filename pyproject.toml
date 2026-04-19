@@ -28,6 +28,8 @@ dependencies = [
     "yt-dlp>=2026.2.4",
 ]
 
+[project.optional-dependencies]
+dev = ["pre-commit", "ruff"]
 
 [project.scripts]
 sdlp = "sdlp.term:app"
