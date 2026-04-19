@@ -7,7 +7,7 @@ from rich.prompt import Prompt
 import sdlp
 
 from .ui.progress_hooks import progress_downloading, spinner_postprocess
-from .utils.format import AudioFormat, VideoFormat
+from .utils.format import AudioFormat, VideoFormat, ImageFormat
 
 app = typer.Typer()
 console = Console(markup=True, emoji=True)
@@ -57,6 +57,24 @@ def audio(
 
     try:
         sdlp.download_audio(url=url, format=format.value, extras=(ui_opts))
+
+    except Exception as e:
+        print(e)
+
+
+@app.command()
+def thumbnails(
+    url: Annotated[str, typer.Argument()] = "",
+    format: Annotated[ImageFormat, typer.Option()] = ImageFormat.PNG,
+):
+    if not url:
+        url = Prompt.ask(
+            "[b]Enter the url of your video for transfrom its in audio[/b]",
+            console=console,
+        )
+
+    try:
+        sdlp.download_thumbnails(url=url, format=format.value, extras=(ui_opts))
 
     except Exception as e:
         print(e)

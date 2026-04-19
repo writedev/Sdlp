@@ -119,7 +119,7 @@ def download_thumbnails(
 
     utils_opts = {"quiet": no_logs, "outtmpl": f"{file_title}.%(ext)s"}
 
-    ydl_opts = image_opts | utils_opts
+    ydl_opts = image_opts | utils_opts | extras
 
     try:
         with YoutubeDL(ydl_opts) as ydl:
