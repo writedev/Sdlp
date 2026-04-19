@@ -28,9 +28,6 @@ dependencies = [
     "yt-dlp>=2026.2.4",
 ]
 
-[project.optional-dependencies]
-dev = ["pre-commit", "ruff"]
-
 [project.scripts]
 sdlp = "sdlp.term:app"
 
@@ -72,3 +69,8 @@ known-first-party = ["my_project"]
 quote-style = "double"
 indent-style = "space"
 line-ending = "auto"
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]
