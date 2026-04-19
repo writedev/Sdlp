@@ -7,7 +7,7 @@ from rich.prompt import Prompt
 import sdlp
 
 from .ui.progress_hooks import progress_downloading, spinner_postprocess
-from .utils.format import AudioFormat, VideoFormat, ImageFormat
+from .utils.format import AudioFormat, ImageFormat, VideoFormat
 
 app = typer.Typer()
 console = Console(markup=True, emoji=True)
