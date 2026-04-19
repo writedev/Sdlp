@@ -47,7 +47,7 @@ respect-type-ignore-comments = false
 line-length = 88
 target-version = "py311"
 
-exclude = [".git", ".venv", "build", "dist", "__pycache__"]
+exclude = [".git", ".venv", "build", "dist", "__pycache__", "uv.lock"]
 
 [tool.ruff.lint]
 select = [
@@ -71,6 +71,4 @@ indent-style = "space"
 line-ending = "auto"
 
 [dependency-groups]
-dev = [
-    "pre-commit>=4.5.1",
-]
+dev = ["pre-commit>=4.5.1", "ruff>=0.15.11"]

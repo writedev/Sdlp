@@ -1,0 +1,28 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+      - id: check-added-large-files
+        args: ["--maxkb=750"]
+        exclude: ^uv.lock$
+      - id: check-toml
+
+  - repo: local
+    hooks:
+      - id: local-ruff-check
+        name: ruff check
+        require_serial: true
+        entry: uv run ruff check --fix
+        language: system
+        types: [python]
+
+      - id: local-ruff-format
+        name: ruff format
+        require_serial: true
+        entry: uv run ruff format --force-exclude --exit-non-zero-on-format
+        language: system
+        types: [python]
