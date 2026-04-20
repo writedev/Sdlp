@@ -63,7 +63,7 @@ def audio(
 
 
 @app.command(help="Download the video thumbnail using the link")
-def thumbnails(
+def thumbnail(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[ImageFormat, typer.Option()] = ImageFormat.PNG,
 ):

@@ -92,7 +92,7 @@ def download_audio(
         print(e)
 
 
-def download_thumbnails(
+def download_thumbnail(
     url: str,
     format: Literal[
         "png",
