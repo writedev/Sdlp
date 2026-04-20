@@ -26,7 +26,7 @@ def main():
     print("hello")
 
 
-@app.command()
+@app.command(help="Download a video using its link")
 def video(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[VideoFormat, typer.Option()] = VideoFormat.MP4,
@@ -44,7 +44,7 @@ def video(
         print(e)
 
 
-@app.command()
+@app.command(help="Download the video thumbnail using the link")
 def audio(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[AudioFormat, typer.Option()] = AudioFormat.MP3,
@@ -62,7 +62,7 @@ def audio(
         print(e)
 
 
-@app.command()
+@app.command(help="Download the video thumbnail using the link")
 def thumbnails(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[ImageFormat, typer.Option()] = ImageFormat.PNG,
