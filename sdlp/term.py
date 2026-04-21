@@ -2,6 +2,7 @@ from typing import Annotated
 
 import typer
 from rich.console import Console
+from rich.panel import Panel
 from rich.prompt import Prompt
 
 import sdlp
@@ -21,9 +22,20 @@ ui_opts = {
 }
 
 
-@app.command()
-def main():
-    print("hello")
+@app.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    if ctx.invoked_subcommand is not None:
+        return
+
+    presentation_text = f"""
+    [bold underline blue link={sdlp.__repo_link__}]Sdlp[/bold underline blue link] is a downloader based entirely on [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link].
+    It was created to [i]simplify[/i] the use of [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link] and the downloading of videos in various formats.
+    [bold italic]Sdlp[/bold italic] is a diminutive for [bold italic]S[/bold italic]imple yt-[bold italic]dlp[/bold italic].
+    """
+
+    presentation_panel = Panel(renderable=presentation_text, title="Presentation")
+
+    console.print(presentation_panel, justify="center")
 
 
 @app.command(help="Download a video using its link")
