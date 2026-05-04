@@ -93,7 +93,7 @@ def thumbnail(
         )
 
     try:
-        sdlp.download_thumbnails(url=url, format=format.value, extras=(ui_opts))
+        sdlp.download_thumbnail(url=url, format=format.value, extras=(ui_opts))
 
     except Exception as e:
         print(e)
