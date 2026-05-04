@@ -28,14 +28,21 @@ def main(ctx: typer.Context):
         return
 
     presentation_text = f"""
-    [bold underline blue link={sdlp.__repo_link__}]Sdlp[/bold underline blue link] is a downloader based entirely on [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link].
-    It was created to [i]simplify[/i] the use of [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link] and the downloading of videos in various formats.
-    [bold italic]Sdlp[/bold italic] is a diminutive for [bold italic]S[/bold italic]imple yt-[bold italic]dlp[/bold italic].
+[bold underline blue link={sdlp.__repo_link__}]Sdlp[/bold underline blue link] is a downloader based entirely on [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link].
+It was created to [i]simplify[/i] the use of [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link] and the downloading of videos in various formats.
+[bold italic]Sdlp[/bold italic] is a diminutive for [bold italic]S[/bold italic]imple yt-[bold italic]dlp[/bold italic].
     """
 
-    presentation_panel = Panel(renderable=presentation_text, title="Presentation")
+    presentation_panel = Panel(
+        renderable=presentation_text,
+        title="Presentation",
+        border_style="dim",
+        title_align="left",
+    )
 
-    console.print(presentation_panel, justify="center")
+    console.print(presentation_panel, justify="left")
+
+    console.print(ctx.get_help())
 
 
 @app.command(help="Download a video using its link")
