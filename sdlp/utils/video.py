@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from yt_dlp import YoutubeDL
@@ -25,7 +26,7 @@ class Video:
         # self.pure_info: dict = pure_info
         self.__pure_info__ = pure_info
 
-        self.path = self.get_path()
+        self.path = Path()
 
     @property
     def info(self) -> VideoInfo:
@@ -33,6 +34,10 @@ class Video:
 
     def get_path(self) -> Path:
         with YoutubeDL() as ydl:
-            path = Path(ydl.prepare_filename(self.__pure_info__))
+            path = ydl.prepare_filename(self.__pure_info__)
 
-        return path
+            path = os.path.splitext(path)[0] + "." + self.__pure_info__["ext"]
+
+        # path = Path(self.__pure_info__["requested_downloads"][0]["filepath"].)
+
+        return Path(path)
