@@ -1,3 +1,4 @@
+from pathlib import Path
 from typing import Annotated
 
 import typer
@@ -20,6 +21,14 @@ ui_opts = {
     "progress_hooks": [progress_downloading],
     "postprocessor_hooks": [spinner_postprocess],
 }
+
+
+def downloaded_console_msg(path: Path) -> None:
+    """The msg when the downloading is finished"""
+
+    return console.print(
+        f"[bright_green bold]The downloading is finished :sparkles: -> [link={path.resolve().as_uri()}]Click here to open[/link][/bright_green bold]"
+    )
 
 
 @app.callback(invoke_without_command=True)
@@ -57,7 +66,9 @@ def video(
         )
 
     try:
-        sdlp.download_video(url=url, format=format.value, extras=(ui_opts))
+        video = sdlp.download_video(url=url, format=format.value, extras=(ui_opts))
+
+        downloaded_console_msg(video.path)
 
     except Exception as e:
         print(e)
@@ -75,7 +86,9 @@ def audio(
         )
 
     try:
-        sdlp.download_audio(url=url, format=format.value, extras=(ui_opts))
+        video = sdlp.download_audio(url=url, format=format.value, extras=(ui_opts))
+
+        downloaded_console_msg(video.path)
 
     except Exception as e:
         print(e)
@@ -93,7 +106,9 @@ def thumbnail(
         )
 
     try:
-        sdlp.download_thumbnail(url=url, format=format.value, extras=(ui_opts))
+        video = sdlp.download_thumbnail(url=url, format=format.value, extras=(ui_opts))
+
+        downloaded_console_msg(video.path)
 
     except Exception as e:
         print(e)
