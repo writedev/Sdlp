@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+import yt_dlp.version
 from rich.console import Console
 from rich.panel import Panel
 from rich.prompt import Prompt
@@ -32,9 +33,25 @@ def downloaded_console_msg(path: Path) -> None:
 
 
 @app.callback(invoke_without_command=True)
-def main(ctx: typer.Context):
+def main(
+    ctx: typer.Context,
+    version: Annotated[
+        bool,
+        typer.Option(help="Display the version of Sdlp and yt-dlp"),
+    ] = False,
+):
     if ctx.invoked_subcommand is not None:
         return
+
+    if version:
+        return console.print(f"""
+Sdlp version: [bold]{sdlp.__version__}[/bold]
+yt-dlp version: [bold]{yt_dlp.version.__version__}[/bold]
+""")
+
+    ###############################
+    # Presentation text / message #
+    ###############################
 
     presentation_text = f"""
 [bold underline blue link={sdlp.__repo_link__}]Sdlp[/bold underline blue link] is a downloader based entirely on [bold underline blue link=https://github.com/yt-dlp/yt-dlp]yt-dlp[/bold underline blue link].
