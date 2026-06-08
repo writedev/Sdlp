@@ -8,5 +8,6 @@ updates:
   - package-ecosystem: "uv" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
-      time: "19:30"
+      interval: "weekly"
+    commit-message:
+      prefix: "build:"
