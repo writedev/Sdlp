@@ -71,7 +71,8 @@ It was created to [i]simplify[/i] the use of [bold underline blue link=https://g
     console.print(ctx.get_help())
 
 
-@app.command(help="Download a video using its link")
+@app.command("video",help="Download a video using its link")
+@app.command("v", hidden=True)
 def video(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[VideoFormat, typer.Option()] = VideoFormat.MP4,
@@ -91,7 +92,8 @@ def video(
         print(e)
 
 
-@app.command(help="Download the video thumbnail using the link")
+@app.command("audio",help="Download the video thumbnail using the link")
+@app.command("a", hidden=True)
 def audio(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[AudioFormat, typer.Option()] = AudioFormat.MP3,
@@ -111,7 +113,8 @@ def audio(
         print(e)
 
 
-@app.command(help="Download the video thumbnail using the link")
+@app.command("thumbnail", help="Download the video thumbnail using the link")
+@app.command("t", hidden=True)
 def thumbnail(
     url: Annotated[str, typer.Argument()] = "",
     format: Annotated[ImageFormat, typer.Option()] = ImageFormat.PNG,
